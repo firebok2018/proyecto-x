@@ -1,0 +1,23 @@
+package model;
+
+public class Mesa {
+	private int numeromesa;
+	private int numerosillas;
+	public ConexionMesa(int numeromesa, int numerosillas) {
+		super();
+		this.numeromesa = numeromesa;
+		this.numerosillas = numerosillas;
+	}
+	public int getNumeromesa() {
+		return numeromesa;
+	}
+	public void setNumeromesa(int numeromesa) {
+		this.numeromesa = numeromesa;
+	}
+	public int getNumerosillas() {
+		return numerosillas;
+	}
+	public void setNumerosillas(int numerosillas) {
+		this.numerosillas = numerosillas;
+	}
+}

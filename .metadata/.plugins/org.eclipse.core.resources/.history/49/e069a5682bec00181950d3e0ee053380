@@ -1,0 +1,23 @@
+package ConexionDatabase;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
+import model.Tipo_Menu;
+import utils.Conexion;
+
+public class ConexionTipo_Menu extends Conexion {
+	
+	public tipoMenu(JComboBox o){
+		DefaultComboBoxModel<Tipo_Menu> model;
+		
+		Statement st = null;
+		Connection cn = null;
+		ResultSet rs = null;
+		cn = new Conexion().getConexion();
+	}
+}

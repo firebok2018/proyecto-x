@@ -1,0 +1,43 @@
+package ConexionDatabase;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+import model.Mesa;
+import utils.Conexion;
+
+public class ConexionMesa extends Conexion{
+	
+	public int AddMesa(Mesa num){
+		int valor= -1;
+		Connection con = null;
+		PreparedStatement pstm= null;
+		try {
+			con= new Conexion().getConexion();
+			String sql="insert into Ventas.NumMesa values (null,?,?)";
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, num.getNumeromesa());
+			pstm.setInt(2, num.getNumerosillas());
+			valor = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No REGISTRADO");
+			
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return valor;
+		
+	}
+
+}

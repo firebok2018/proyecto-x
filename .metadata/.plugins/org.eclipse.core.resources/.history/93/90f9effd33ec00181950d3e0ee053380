@@ -1,0 +1,26 @@
+package ConexionDatabase;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import model.Mesa;
+import utils.Conexion;
+
+public class ConexionMesa extends Conexion{
+	
+	public int AddMesa(Mesa num){
+		int valor= -1;
+		Connection con = null;
+		PreparedStatement pstm= null;
+		try {
+			con= new Conexion().getConexion();
+			String sql="insert into Ventas.NumMesa";
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+		
+	}
+
+}

@@ -1,0 +1,39 @@
+package model;
+
+public class Mesa {
+	private int idMesa;
+	private int numeromesa;
+	private int numerosillas;
+	public Mesa(int idMesa, int numeromesa, int numerosillas) {
+		super();
+		this.idMesa = idMesa;
+		this.numeromesa = numeromesa;
+		this.numerosillas = numerosillas;
+	}
+	public int getIdMesa() {
+		return idMesa;
+	}
+	public void setIdMesa(int idMesa) {
+		this.idMesa = idMesa;
+	}
+	public int getNumeromesa() {
+		return numeromesa;
+	}
+	public void setNumeromesa(int numeromesa) {
+		this.numeromesa = numeromesa;
+	}
+	public int getNumerosillas() {
+		return numerosillas;
+	}
+	public void setNumerosillas(int numerosillas) {
+		this.numerosillas = numerosillas;
+	}
+	public void generarNum(){
+		int x=1;
+		if (x == 1)
+			return x;
+		else
+			return x++;	
+	}
+	
+}

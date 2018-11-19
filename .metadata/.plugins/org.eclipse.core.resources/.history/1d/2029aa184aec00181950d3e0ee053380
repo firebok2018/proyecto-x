@@ -1,0 +1,233 @@
+package ui;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import Arreglos.ArregloMesa;
+import ConexionDatabase.ConexionMesa;
+import model.Mesa;
+
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
+import java.sql.ResultSet;
+import java.awt.event.KeyEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
+
+public class JIFActu_Mesa extends JInternalFrame implements ActionListener, FocusListener  {
+	private JLabel lblNumeroDeMesa;
+	private JComboBox cboNumMesa;
+	private JLabel lblEstado;
+	private JComboBox cboTipoMesa;
+	private JLabel lblSitioDisponibles;
+	private JTextField txtSillas;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private JButton btnCerrar;
+	private JButton btnReservar;
+	private JLabel lblNDeMesa;
+	private JTextField txtCantidadMesa;
+	private JButton btnAgregar;
+	private JLabel lblSillas;
+	private JTextField txtNumeroSillas;
+	private DefaultTableModel modelo;
+
+	ConexionMesa ConecMesa= new ConexionMesa();
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JIFActu_Mesa frame = new JIFActu_Mesa();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public JIFActu_Mesa() {
+		setBounds(100, 100, 450, 354);
+		getContentPane().setLayout(null);
+		
+		lblNumeroDeMesa = new JLabel("Numero de mesa:");
+		lblNumeroDeMesa.setBounds(10, 11, 105, 14);
+		getContentPane().add(lblNumeroDeMesa);
+		
+		cboNumMesa = new JComboBox();
+		cboNumMesa.addFocusListener(this);
+		//comboBox.setModel(new DefaultComboBoxModel(new String[] {"Seleccionar"}));
+		cboNumMesa.setBounds(125, 8, 94, 20);
+		getContentPane().add(cboNumMesa);
+		
+		lblEstado = new JLabel("Mesa:");
+		lblEstado.setBounds(20, 36, 46, 14);
+		getContentPane().add(lblEstado);
+		
+		cboTipoMesa = new JComboBox();
+		cboTipoMesa.addFocusListener(this);
+		
+		//comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"LIBRE", "DISPONIBLE", "COMPLETO"}));
+		cboTipoMesa.setBounds(119, 33, 116, 20);
+		getContentPane().add(cboTipoMesa);
+		
+		
+		
+		lblSitioDisponibles = new JLabel("Sillas:");
+		lblSitioDisponibles.setBounds(10, 66, 86, 14);
+		getContentPane().add(lblSitioDisponibles);
+		
+		txtSillas = new JTextField();
+		txtSillas.setEditable(false);
+		txtSillas.setBounds(106, 64, 86, 20);
+		getContentPane().add(txtSillas);
+		txtSillas.setColumns(10);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 144, 414, 168);
+		getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		modelo = new DefaultTableModel();
+		modelo.addColumn("Numero de Mesa");
+		modelo.addColumn("Estado");
+		modelo.addColumn("Sillas");
+		table.setModel(modelo);
+		
+		
+		
+		
+		btnCerrar = new JButton("Cerrar");
+		btnCerrar.addActionListener(this);
+		btnCerrar.setBounds(290, 62, 89, 23);
+		getContentPane().add(btnCerrar);
+		
+		btnReservar = new JButton("Reservar");
+		btnReservar.addActionListener(this);
+		btnReservar.setBounds(290, 7, 89, 23);
+		getContentPane().add(btnReservar);
+		
+		lblNDeMesa = new JLabel("N\u00B0 de Mesa");
+		lblNDeMesa.setBounds(20, 115, 76, 14);
+		getContentPane().add(lblNDeMesa);
+		
+		txtCantidadMesa = new JTextField();
+		//txtCantidadMesa.setText("");###############
+		txtCantidadMesa.setBounds(88, 112, 53, 20);
+		getContentPane().add(txtCantidadMesa);
+		txtCantidadMesa.setColumns(10);
+		
+		btnAgregar = new JButton("Agregar");
+		
+		btnAgregar.addActionListener(this);
+		btnAgregar.setBounds(253, 110, 89, 23);
+		getContentPane().add(btnAgregar);
+		
+		lblSillas = new JLabel("Sillas:");
+		lblSillas.setBounds(151, 115, 46, 14);
+		getContentPane().add(lblSillas);
+		
+		txtNumeroSillas = new JTextField();
+		txtNumeroSillas.setText("4");
+		//txtNumeroSillas.setText("4");
+		txtNumeroSillas.setBounds(189, 112, 46, 20);
+		getContentPane().add(txtNumeroSillas);
+		txtNumeroSillas.setColumns(10);
+
+	}
+	ArregloMesa m= new ArregloMesa();
+	
+	public void actionPerformed(ActionEvent arg0) {
+		if(arg0.getSource() == btnReservar){
+			actionPerformedBtnReservar(arg0);
+
+		}
+		if (arg0.getSource() == btnAgregar) {
+			actionPerformedBtnAgregar(arg0);
+		}
+		if (arg0.getSource() == btnCerrar) {
+			actionPerformedBtnCerrar(arg0);
+		}
+	}
+	protected void actionPerformedBtnReservar(ActionEvent arg0) {
+		try {
+			int mesa = NumeroMesa();
+			if (mesa>=0 && mesa<50) {
+				try {
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			System.out.println("numero correcto mesa");
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			System.out.println("Ingrese un Numero");
+		}
+		
+		
+	}
+	protected void actionPerformedBtnCerrar(ActionEvent arg0) {
+		dispose();
+	}
+	protected void actionPerformedBtnAgregar(ActionEvent arg0) {
+		try {
+			Mesa newMesa = new Mesa(0,NumeroMesa(), NumeroSilla());
+			int valor=ConecMesa.AddMesa(newMesa);
+			if(valor==1){
+				
+				System.out.println("Registrado");
+				
+				
+			}else{
+				System.out.println("No Registrado");
+			}
+			
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			System.out.println("Ingrese un Formato de numero");
+		}
+		
+	}
+	int NumeroMesa(){ return Integer.parseInt(txtCantidadMesa.getText()); }
+	int NumeroSilla(){ return Integer.parseInt(txtNumeroSillas.getText()); }
+	
+
+	
+	
+	public void focusGained(FocusEvent arg0) {
+		if (arg0.getSource() == cboNumMesa) {
+			focusGainedCboNumMesa(arg0);
+		}
+		if (arg0.getSource() == cboTipoMesa) {
+			focusGainedCboCantMesa(arg0);
+		}
+	}
+	public void focusLost(FocusEvent arg0) {
+		
+	}
+	protected void focusGainedCboCantMesa(FocusEvent arg0) {
+		//System.out.println("per");
+		ConecMesa.TipoMesa(cboTipoMesa);
+	}
+	protected void focusGainedCboNumMesa(FocusEvent arg0) {
+		ConecMesa.numeroMesa(cboNumMesa);
+	}
+}

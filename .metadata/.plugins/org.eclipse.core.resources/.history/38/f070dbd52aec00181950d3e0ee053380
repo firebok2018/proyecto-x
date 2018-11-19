@@ -1,0 +1,15 @@
+package ConexionDatabase;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
+import model.Tipo_Menu;
+
+public class ConexionTipo_Menu {
+	
+	public tipoMenu(JComboBox o){
+		DefaultComboBoxModel<Tipo_Menu> model;
+		
+		return null;
+	}
+}

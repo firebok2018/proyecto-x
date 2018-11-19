@@ -1,0 +1,7 @@
+package model;
+
+public class Tipo_Extras {
+	private int idExtras;
+	private String nomExtras;
+
+}

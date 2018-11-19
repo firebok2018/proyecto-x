@@ -1,0 +1,8 @@
+package ConexionDatabase;
+
+public class ConexionTipo_Menu {
+	
+	public tipoMenu(){
+		
+	}
+}

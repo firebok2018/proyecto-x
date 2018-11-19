@@ -1,0 +1,18 @@
+package Arreglos;
+
+import java.util.ArrayList;
+
+import model.Mesa;
+
+public class ArregloMesa {
+
+	private ArrayList<Mesa> num;
+	public ArregloMesa() {
+		super();
+		num = new ArrayList<>();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+}
